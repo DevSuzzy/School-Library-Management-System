@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
@@ -31,6 +34,14 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.findById(id).
                 orElseThrow(()-> new StudentNotFoundException("Student not found exception"));
         return mapToResponse(student);
+    }
+
+
+    @Override
+    public List<StudentResponse> listOfStudents() {
+        return studentRepository.findAll().stream()
+                .map((val)-> mapper.map(val,StudentResponse.class)).collect(Collectors.toList());
+
     }
 
     private StudentResponse mapToResponse(Student student) {

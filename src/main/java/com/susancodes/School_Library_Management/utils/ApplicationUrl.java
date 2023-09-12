@@ -7,4 +7,6 @@ public interface ApplicationUrl {
      String REGISTER_NEW_STUDENT = "/register";
 
      String FIND_STUDENT = "/{id}";
+
+     String FIND_ALL_STUDENT ="/findAll";
 }
